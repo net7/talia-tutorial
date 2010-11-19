@@ -1,0 +1,22 @@
+<tr>
+  <td>
+    <span class="predicate"><%= property_item %></span></td>
+  <td><span class="value">
+      <% for value in values %>
+        <% if defined? uri %>
+          <%  predicate = uri || nil %>
+        <% end %>
+        <% unless (value == N::TALIA.Source) || (value == N::TALIA.ActiveSource) %>
+          <%= semantic_target(value, predicate)  %><br/>
+        <% end %>
+      <% end %>
+    </span>
+    <% if defined? uri %>
+      <% for value in values %>
+        <span class="rdfa_hidden" property="<%= uri %>">
+          <%= semantic_target(value, nil)  %>
+        </span>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

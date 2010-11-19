@@ -1,0 +1,56 @@
+div.eztipContainer {
+	position: absolute;
+	padding: 15px;
+}
+div.eztipContainer div { position: relative; float: left; }
+div.eztipContainer div.eztipLeft { clear: both; }
+div.eztipContainer .eztipContent {
+    padding: 10px 10px 8px 10px;
+    background: url(ez/ez_bg.png) top left repeat;
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    color: #FFF;
+    width: 400px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	font-size: 11px;
+	line-height: 20px;
+}
+
+
+div.eztipContainer.bottomLeft{
+	background: url(ez/ez_bottomLeft_stem.png);
+	background-position: 0 bottom;
+	background-repeat: no-repeat;
+}
+
+div.eztipContainer.bottomRight {
+	background: url(ez/ez_bottomRight_stem.png);
+	background-position: right bottom;
+	background-repeat: no-repeat;
+}
+
+div.eztipContainer.topLeft {
+	background: url(ez/ez_topLeft_stem.png);
+	background-position: 0 top;
+	background-repeat: no-repeat;
+}
+
+div.eztipContainer.topRight {
+	background: url(ez/ez_topRight_stem.png);
+	background-position: right top;
+	background-repeat: no-repeat;
+}
+
+div.eztipContainer div.eztipClose.hidden { display: none; }
+div.eztipContainer div.eztipClose {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: -10px;
+  right: -10px;
+  background: black url(icons/cross.png) no-repeat 2px 2px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+  z-index: 1000;
+  cursor: pointer;
+}

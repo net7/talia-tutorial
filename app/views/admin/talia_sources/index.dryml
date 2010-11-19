@@ -1,0 +1,16 @@
+<index-page>
+  
+	<content: replace>
+
+          <sidebared-content>
+			<collection:>
+				<item:>
+					<card-with-drag-handle />
+				</item:>
+			</collection:>
+			<aside:>
+				<collection-sidebar with="&all_collections" />
+			</aside:>
+		</sidebared-content>
+	</content:>
+</index-page>

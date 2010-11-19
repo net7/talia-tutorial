@@ -1,0 +1,168 @@
+/* Base della finestra */
+div#THCAnnotations {
+	position: fixed;
+	top:10px;
+	width: 400px;
+	/* background-color: rgba(0,0,0,0.88); */
+	background-color: #5f5348;
+
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
+
+div#THCAnnotations.collapsed {
+	background-color: #a19284;
+}
+
+div#THCAnnotations.collapsed .THCNoteItem {
+    display: none;
+}
+
+/* Testata */
+div#THCAnnotations h2 {
+	display: block;
+	text-indent: 20px;
+	background-color: rgba(51,51,51,0.88);
+	border-bottom: 1px solid #8c8c8c;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	color: #fff;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: normal;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 14px;
+}
+
+/* Singola Nota */
+.THCNoteItem {
+	border-bottom: 1px solid #515151;
+	padding: 10px;
+	background-color: #a19284;
+}
+
+.THCNoteItem:last-child {
+	border-bottom: none;
+}
+
+.THCNoteItem.expanded {
+	background-color: #5d5247;
+}
+
+.THCNoteItem:last-child.expanded {
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+}
+
+.THCNoteItem h3 {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #fff;	display:block; 
+    text-indent: 20px; 
+    background: transparent url(icons/page_white_text_width.png) no-repeat scroll left top; 
+    cursor: pointer;
+}
+
+/* Dettagli Nota */
+.THCNoteItem span {
+	display: block;
+	border: 0px; 
+	padding: 1px;
+	margin: 1px;
+	font-size: 10px;
+	color: #949494;
+}
+
+.THCNoteItem span.hide {
+	display: none;
+}
+
+div.THCNoteItem.collapsed .swicky_hidden {
+	display: none;
+}
+
+.THCNoteItem span.swicky_field_name {
+    display: inline;
+    color: #fc0;
+}
+
+
+.THCNoteItem table.THCStatementTable {
+	margin-top: 5px;
+	color: #fff;
+}
+
+.THCNoteItem table.THCStatementTable td span {
+	color: #fff;	
+}
+
+.THCNoteItem span.THCStatement span {
+	display: inline;
+	background-color: #ffd400;
+	padding: 3px;
+}
+
+.THCNoteItem table.THCStatementTable td {
+	padding: 0px;
+	margin: 0px;
+	background-color: #dfb900;
+}
+
+.THCNoteItem table.THCStatementTable td.swicky_arrow {
+    background-color: #949494;
+}
+.THCNoteItem table.THCStatementTable td.swicky_arrow span.swicky_arrow {
+    font-size: 2.0em;
+    color: #fc0;
+}
+
+
+.THCNoteItem span.SourceFragment {
+	background-color: #dc0000;
+	color: #fff;
+	padding: 3px;
+	cursor: pointer;
+}
+
+.THCNoteItem span.Source {
+	background-color: #00ba00;
+	padding: 3px;
+	cursor: pointer;
+}
+
+div#THCAnnotations.loading h2 { 
+    background: url(ajax-loader.gif) no-repeat scroll left top;
+    background-position: 50% 50%;
+    text-indent: -99999px;
+}
+
+#THCTooltip {
+    background-color: #ffe;
+}
+
+
+
+span.swicky_tooltip_entry {
+	display: block;
+	padding: 2px;
+	font-size: 10px;
+	color: #949494;
+	background-color: #0c0c0c;
+    border-color: #666;
+    border-style: dashed;
+    border-width: 0 0 1px 0;
+}
+
+span.swicky_tooltip_entry span.swicky_tooltip_field_name {
+    color: #fc0;
+    display: inline;
+}
+
+
+

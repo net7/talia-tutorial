@@ -1,0 +1,16 @@
+<h3 class="toggle closed">Source properties</h3>
+<div style="display: none;" class="section source_properties">
+    <div class='section_content'>
+    <script type="text/javascript">
+        $(document).ready(function() {
+              $("#properties_table").tablesorter();
+              $("#data_table").tablesorter();
+              // $(".properties_list").hide();
+              // $(".show_properties").click(function() {$(".properties_list").slideToggle(600);});
+        });
+    </script>
+
+<%= render(:partial => 'property_list') %>
+    </div>
+    <div class='section_notes'></div>
+</div>

@@ -1,0 +1,153 @@
+<!-- Tag definitions for the Admin subsite -->
+ 
+<include src="rapid" plugin="hobo"/>
+
+<include src="taglibs/auto/admin/rapid/cards"/>
+<include src="taglibs/auto/admin/rapid/pages"/>
+<include src="taglibs/auto/admin/rapid/forms"/>
+<include src="taglibs/cards"/>
+<include src="taglibs/forms"/>
+
+
+<set-theme name="clean"/>
+
+<def tag="app-name">Talia Admin Panel</def>
+
+
+<def tag="single-connection" attrs="typename, attribute, type, options">
+    <% typename ||= (this.class.name.underscore || type.underscore) %>
+    <% options ||= type.constantize.all.collect { |el| [ "#{el.name}", el.uri.to_s ] }.sort %>
+    <% attribute_el       = this.send(attribute.to_sym) %>
+    <if test              = "&attribute_el.blank?">
+        <select-menu name = "#{typename}[#{attribute}]"
+            options       = "&options"
+            first-option  = "&I18n.t('text_page.select_one')" />
+    </if>
+    <else>
+        <select-menu name = "#{typename}[#{attribute}]"
+            options       = "&options"
+            selected      = "&attribute_el.uri.to_s" />
+    </else>
+</def>
+
+<def tag="collection-sidebar">
+	<h2><ht key="talia_collections.model_name_plural">Collections</ht></h2>
+	<collection>
+		<item:>
+			<div id="#{this.to_uri.safe_encoded}">
+				<card/>
+			</div>
+		</item:>
+		<after-item:>
+			<if test="&this.updatable_by?(current_user)">
+				<%= drop_receiving_element(this.to_uri.safe_encoded,
+				:url => { :controller => 'admin/talia_sources', :action => 'assign_collection' },
+				:with => "'source=' + encodeURIComponent(element.id) + '&collection=#{this.to_uri.safe_encoded}'",
+				:hoverclass => 'drop_ready'
+				) %>
+			</if>
+		</after-item:>
+		<empty-message:><ht key="talia_collections.empty_message">No collections found</ht></empty-message>
+	</collection>
+</def>
+
+
+<def tag="delete-icon">
+    <delete-button image='../images/icons/cross.png' class="button-float" />
+</def>
+
+<def tag="prop-language">
+	<b>Language:</b> <this.lang if="lang" />
+	<else>n/a (default)</else>
+</def>
+
+<def tag="semlabel"><this.label if="respond_to?(:label)" /><else><do if="respond_to?(:uri)"><%= this.to_uri.to_name_s %></do><else><%= this.to_s %></else></else></def>
+
+<def tag="prop-type">
+	<b>Type:</b> <this.type if="type" />
+	<else>n/a (String)</else>
+</def>
+
+<def tag="property-string-card">
+	<card>
+		<header:><h4>"<this/>"</h4></header:>
+		<body:>
+			<p><prop-type /> <prop-language /></p>
+		</body:>
+	</card>
+</def>
+
+<def tag="property-relation-card">
+	<card>
+		<header:>
+			<h4>
+				<wrap tag="a" href="&url_for(:controller => 'admin/talia_sources', :action => this.id)" when="is_a?(TaliaCore::ActiveSource)">
+					&lt;<semlabel />&gt;
+				</wrap>
+			</h4>
+		</header:>
+		<body:><p><%= this.uri.to_s %></p></body:>
+	</card>
+
+</def>
+
+<def tag="property-card">
+	<property-string-card if="is_a?(TaliaCore::PropertyString)" />
+	<else><property-relation-card /></else>
+</def>
+
+<def tag="properties">
+	<repeat: with="&@properties">
+		<h3><%= this_key.to_uri.to_name_s %></h3>
+		<property-card repeat param/>
+	</repeat:>
+</def>
+<def tag="sidebared-content">
+	<section-group>
+		<section param="main-content">
+			<header param="content-header">
+				<h2 param="heading">
+         				<ht key="#{model.name.tableize}.index.heading">
+						<%= model.name.titleize.pluralize %>
+         				</ht>
+       			</h2>
+
+				<p param="count" if>
+					<ht key="#{model.name.tableize}.collection.count" count="&this.size">
+						There <count prefix="are"/>
+					</ht>
+				</p>
+			</header>
+
+			<section param="content-body">
+				<a action="new" to="&model" param="new-link">
+					<ht key="#{model.name.tableize}.actions.new">New <%= model.name.titleize %></ht>
+				</a>
+
+				<page-nav param="top-page-nav"/>
+
+				<section>
+					<collection param />
+				</section>
+			</section>
+		</section>
+		<aside param />
+	</section-group>
+</def>
+
+<def tag="main-nav">
+  <navigation class="main-nav" merge-attrs param="default">
+    <nav-item href="#{base_url}/admin">Home</nav-item>
+    <% models = Hobo::Model.all_models.select { |m| linkable?(m, :index) && not_hidden?(m) }.sort_by &:name -%>
+    <repeat with="&models">
+      <nav-item><ht key="#{this.name.tableize}.nav_item"><%= this.view_hints.model_name_plural %></ht></nav-item>
+    </repeat>
+      <nav-item href="#{base_url}/admin/import"><ht key="import.nav_item">Import</ht></nav-item>
+  </navigation>
+</def>
+
+<extend tag="page">
+  <old-page merge without-live-search>
+	<app-name: replace><h1><a href="#{base_url}/admin/"><app-name/></a></h1></app-name>
+  </old-page>
+</extend>
