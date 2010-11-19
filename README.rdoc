@@ -1,0 +1,10 @@
+= Talia Tutorial Application
+
+A Ruby on Rails 2.3.8 application that can be used as part of the
+Talia tutorial (http://net7sviluppo.com/trac/talia/wiki/TaliaTutorial)
+or even as a quickstart for Talia Core-based applications.
+
+Talia Core (https://github.com/net7/talia_core) is the core plugin of
+the Talia semantic digital web library system.
+
+Talia is also part of the Muruca project (http://www.muruca.org).
