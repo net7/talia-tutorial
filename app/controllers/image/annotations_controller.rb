@@ -56,7 +56,7 @@ class Image::AnnotationsController < ApplicationController
         image_url = @file.class.iip_server_uri + "?FIF=" + @file.get_iip_root_file_path
       else
         background = 'modules/image/simple/imageHolder.swf'
-        image_url = url_for_data_record(@file)
+        image_url = url_for :controller => '/source_data', :action => 'show', :id => @file.id
       end
       @response[:data][:modules] = {:background => background}
       @response[:data][:image] = image_url
