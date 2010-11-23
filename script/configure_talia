@@ -125,17 +125,17 @@ print "Enter the site name (it will appear in the window title): "
 talia_config.site_name = readl
 
 puts
-print "Enter the URI for your site: "
+print "Enter the URI for your site. The URI requires a final \"/\": "
 site_url = readl(true)
 
 if(read_yn('Do you want to use the IIP image server?'))
   puts
   print "Enter the URL of your IIP server, or the port number (for default URL on localhost): "
   iip_url = readl
-
   # If only numerals, we'll create the URL
-  if(iip_url =~ /^\d*$/)
-    iip_url = "http://localhost:#{iip_url}/fcgi-bin/iipsrv.fcgi"
+  if iip_url =~ /^\d*$/
+    iip_url = ":#{iip_url}" if iip_url != ''
+    iip_url = "http://localhost#{iip_url}/fcgi-bin/iipsrv.fcgi"
   end
   puts "Setting IIP URL to: #{iip_url}"
 
@@ -144,6 +144,17 @@ if(read_yn('Do you want to use the IIP image server?'))
   puts
   print "Enter the path to store the IIP image files (return for default): "
   iip_directory = readl
+
+  vips_default_command = `which vips`.gsub("\n", '')
+  print "Enter the path to the vips command (default: #{vips_default_command.inspect}): "
+  vips_command = readl
+  talia_config.vips_command = vips_command == '' ? vips_default_command : vips_command
+
+
+  convert_default_command = `which convert`.gsub("\n", '')
+  print "Enter the path to the convert command (default: #{convert_default_command.inspect}): "
+  convert_command = readl
+  talia_config.convert_command = convert_command == '' ? convert_default_command : convert_command
 end
 
 puts
