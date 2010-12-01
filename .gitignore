@@ -1,11 +1,4 @@
-nbproject
 data
-/sesame*
+iip_root
 vendor
-talia_demo_data
-talia_core.yml
-database.yml
-rdfstore.yml
-/config/talia_core.yml
-/config/database.yml
-/config/rdfstore.yml
+sesame/*
