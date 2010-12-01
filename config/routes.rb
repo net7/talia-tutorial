@@ -34,11 +34,18 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'sources/:action/:id', :controller => 'sources'
   map.resources :sources, :requirements => { :id => /.+/  }
 
+  # DEPRECATED: use 'boxview' instead of boxView.
   map.connect 'boxView/', :controller => 'boxView', :action => 'index'
   map.connect 'boxView/dispatch', :controller => 'boxView', :action => 'dispatch'
-  map.connect 'boxView/graph_xml/:id', :controller => 'boxView', :action => 'graph_xml'
- 
+  map.connect 'boxView/graph_xml/:id', :controller => 'boxView', :action => 'graph_xml' 
   map.connect 'boxView/:id', :controller => 'boxView', :action => 'show'
+  # NEW: will slowly replace 
+  map.connect 'boxview/', :controller => 'boxView', :action => 'index'
+  map.connect 'boxview/dispatch', :controller => 'boxView', :action => 'dispatch'
+  map.connect 'boxview/graph_xml/:id', :controller => 'boxView', :action => 'graph_xml' 
+  map.connect 'boxview/:id', :controller => 'boxView', :action => 'show'
+
+
   map.resources :requirements => { :id => /.+/}
 
   # Routes for talia_files flexip stuff
